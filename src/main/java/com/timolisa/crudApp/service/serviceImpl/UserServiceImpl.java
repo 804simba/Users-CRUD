@@ -38,10 +38,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseDto edit(UserDto userDto) throws BadCredentialsException {
-        User user = userRepository.findByUsername(userDto.getUsername())
+    public ResponseDto edit(Long userId, UserDto userDto) throws BadCredentialsException {
+        User user = userRepository.findById(userId)
                         .orElseThrow(() -> new NoSuchElementException("User does not exist"));
-        ResponseDto response = new ResponseDto();
+
         if (validateInputs(userDto)) {
             user.setUsername(user.getUsername());
             user.setEmail(userDto.getEmail());

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
     UserDto saveUser(UserDto userDto) throws BadCredentialsException;
-    ResponseDto edit(UserDto userDto) throws BadCredentialsException;
+    ResponseDto edit(Long userId, UserDto userDto) throws BadCredentialsException;
     ResponseDto deleteUser(Long userId);
     UserDto getUserByUsername(String username);
     UserDto getUserById(Long userId);

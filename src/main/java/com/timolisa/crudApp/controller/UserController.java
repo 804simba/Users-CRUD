@@ -51,9 +51,10 @@ public class UserController {
         return ResponseEntity.created(URI.create("/user/new" + userDto.getUsername())).body(savedUser);
     }
 
-    @PutMapping("/user/edit")
-    public ResponseEntity<?> editUser(@RequestBody UserDto userDto) {
-        ResponseDto response = userService.edit(userDto);
+    @PutMapping("/user/edit/{id}")
+    public ResponseEntity<?> editUser(@RequestBody UserDto userDto,
+                                      @PathVariable("id") Long userId) throws BadCredentialsException {
+        ResponseDto response = userService.edit(userId, userDto);
         return ResponseEntity.ok().body(response);
     }
 
