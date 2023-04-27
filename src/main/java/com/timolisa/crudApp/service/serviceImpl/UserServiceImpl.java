@@ -19,11 +19,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     @Override
     public UserDto saveUser(UserDto userDto) throws BadCredentialsException {
-        String username = userDto.getUsername();
-        String email = userDto.getEmail();
-        String password = userDto.getPassword();
-
-        if (!username.equals("") && !email.equals("") && !password.equals("")) {
+        if (validateInputs(userDto)) {
             User user = userDtoToUser(userDto);
             userRepository.save(user);
             return userToUserDto(user);
@@ -42,14 +38,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseDto edit(UserDto userDto) {
+    public ResponseDto edit(UserDto userDto) throws BadCredentialsException {
         User user = userRepository.findByUsername(userDto.getUsername())
                         .orElseThrow(() -> new NoSuchElementException("User does not exist"));
-        user.setUsername(user.getUsername());
-        user.setEmail(userDto.getEmail());
-        return ResponseDto.builder()
-                .message("Edit successful")
-                .build();
+        ResponseDto response = new ResponseDto();
+        if (validateInputs(userDto)) {
+            user.setUsername(user.getUsername());
+            user.setEmail(userDto.getEmail());
+            return ResponseDto.builder()
+                    .message("Edit successful")
+                    .build();
+        } else {
+            throw new BadCredentialsException("Invalid username or email");
+        }
     }
 
     @Override
@@ -88,5 +89,15 @@ public class UserServiceImpl implements UserService {
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .build();
+    }
+    private boolean validateInputs(UserDto userDto) {
+        boolean status = false;
+        String username = userDto.getUsername();
+        String email = userDto.getEmail();
+        String password = userDto.getPassword();
+        if (!username.equals("") && !email.equals("") && !password.equals("")) {
+            status = true;
+        }
+        return status;
     }
 }
