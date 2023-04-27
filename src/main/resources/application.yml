@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: users-crud-api-v1
+  datasource:
+    password: ''
+    url: jdbc:postgresql://localhost:5432/usersDB
+    username: ''
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+
