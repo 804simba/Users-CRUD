@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     public UserDto saveUser(UserDto userDto) throws BadCredentialsException {
         if (validateInputs(userDto)) {
             User user = userDtoToUser(userDto);
+            user.setUsername(userDto.getUsername().toLowerCase());
             userRepository.save(user);
             return userToUserDto(user);
         } else {
@@ -43,8 +44,9 @@ public class UserServiceImpl implements UserService {
                         .orElseThrow(() -> new NoSuchElementException("User does not exist"));
 
         if (validateInputs(userDto)) {
-            user.setUsername(user.getUsername());
+            user.setUsername(user.getUsername().toLowerCase());
             user.setEmail(userDto.getEmail());
+            userRepository.save(user);
             return ResponseDto.builder()
                     .message("Edit successful")
                     .build();

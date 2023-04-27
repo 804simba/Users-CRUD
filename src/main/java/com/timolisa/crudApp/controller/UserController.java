@@ -27,9 +27,10 @@ public class UserController {
         return ResponseEntity.ok().body(userDto);
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/search/{username}")
     public ResponseEntity<?> fetchUserByUsername(@PathVariable("username") String username) {
-        UserDto userDto = userService.getUserByUsername(username);
+        UserDto userDto = userService.getUserByUsername(username.toLowerCase());
+
         return ResponseEntity.ok().body(userDto);
     }
 
