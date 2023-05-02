@@ -1,4 +1,4 @@
-package com.timolisa.crudApp.utitlity;
+package com.timolisa.crudApp.utility;
 
 public class AppConstants {
     public static final String CLIENT_ID = "144795826088-gnshh6sv0acfmf9afdm6n8op5t5uui8h.apps.googleusercontent.com";

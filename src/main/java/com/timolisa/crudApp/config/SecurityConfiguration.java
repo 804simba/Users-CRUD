@@ -16,8 +16,8 @@ import org.springframework.security.oauth2.client.web.AuthenticatedPrincipalOAut
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static com.timolisa.crudApp.utitlity.AppConstants.CLIENT_ID;
-import static com.timolisa.crudApp.utitlity.AppConstants.CLIENT_SECRET;
+import static com.timolisa.crudApp.utility.AppConstants.CLIENT_ID;
+import static com.timolisa.crudApp.utility.AppConstants.CLIENT_SECRET;
 
 @Configuration
 @EnableWebSecurity
